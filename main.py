@@ -19,7 +19,7 @@ def haslo():
 
             conn = sqlite3.connect("lcc")
             cur = conn.cursor()
-            cur.execute("select* from invoices")
+            cur.execute("select * from invoices")
             print(cur.fetchone()[1])
             results = cur.fetchall()
             root.mainloop()
@@ -38,7 +38,7 @@ frmenu._init_widgets()
 
 conn = sqlite3.connect("lcc")
 cur = conn.cursor()
-cur.execute("select* from invoices")
+cur.execute("select * from invoices")
 print(cur.fetchone()[1])
 results=cur.fetchall()
 if __name__ == "__main__":

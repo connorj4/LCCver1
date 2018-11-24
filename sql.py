@@ -5,7 +5,7 @@ class DB_SESSION:
         self.conn=conn
         self.cur=self.conn.cursor()
 
-    def _query(self,q="""SELECT * from invoices"""):
+    def _query(self,q="SELECT * from invoices"):
         self.cur.execute(q)
         return self.cur.fetchall()
     def _find_products(self,val):
@@ -49,9 +49,9 @@ class DB_SESSION:
         i_d=self.cur.fetchone()[0] + 1
         items=[]
         while True:
-            name=input('Vehicle Model: ')
+            name=input('Vehicle Make: ')
             if name =='': break
-            desc=input('Vehicle type: ')
+            desc=input('Vehicle Model: ')
             price=input('Price: ')
             t=(i_d,name,desc,int(price))
             self.cur.execute('insert into products values (?,?,?,?)', t)

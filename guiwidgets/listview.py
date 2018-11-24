@@ -6,7 +6,7 @@ class MultiListbox(Frame):
         Frame.__init__(self, master)
         self.lists = []
         for l,w in lists:
-            frame = Frame(self); frame.pack(side=LEFT, expand=YES, fill=BOTH)
+            frame = Frame(self); frame.pack(side=LEFT, expand=TRUE, fill="both")
             Label(frame, text=l, borderwidth=1, relief=RAISED).pack(fill=X)
             lb = Listbox(frame, width=w, borderwidth=0, selectborderwidth=0,
                  relief=FLAT, exportselection=FALSE)
@@ -17,11 +17,13 @@ class MultiListbox(Frame):
             lb.bind('<Leave>', lambda e: 'break')
             lb.bind('<B2-Motion>', lambda e, s=self: s._b2motion(e.x, e.y))
             lb.bind('<Button-2>', lambda e, s=self: s._button2(e.x, e.y))
-        frame = Frame(self); frame.pack(side=LEFT, fill=Y)
-        Label(frame, borderwidth=1, relief=RAISED).pack(fill=X)
-        sb = Scrollbar(frame, orient=VERTICAL, command=self._scroll)
-        sb.pack(expand=YES, fill=Y)
+        frame = Frame(self); frame.pack(side="left", fill="y")
+        Label(frame, borderwidth=1, relief=RAISED).pack(fill="x")
+        sb = Scrollbar(frame, orient="vertical", command=self._scroll)
+        sb.pack(side="left",fill="both",expand=True)
+        #weird scrolling
         self.lists[0]['yscrollcommand']=sb.set
+
 
     def _select(self, y):
         row = self.lists[0].nearest(y)
