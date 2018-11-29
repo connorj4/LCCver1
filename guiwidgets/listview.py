@@ -4,7 +4,7 @@ from tkinter import FALSE, Y, Scrollbar, VERTICAL, END
 class MultiListbox(Frame):
     """MultiListbox made by Labels as table header and Listbox as table colomns"""
     def __init__(self, master, lists):
-        """hi"""
+        """initialize visual frame"""
         Frame.__init__(self, master)
         self.lists = []
         for l, w in lists:
