@@ -13,7 +13,7 @@ def _init_toolbar(tbmaster):
     tbmaster.tb.configure(background="grey90",bd=0)
     tbmaster.tb.pack(side=TOP,fill=X)
     
-    tbmaster.btn_add=Button(tbmaster.tb,bg="grey90",bd=0,fg="green",cursor="hand1",text="Add",compound="bottom",command=tbmaster.btn_add_click)
+    tbmaster.btn_add=Button(tbmaster.tb,bg="grey90",bd=0,cursor="hand1",text="Add",compound="bottom",command=tbmaster.btn_add_click)
     tbmaster.imgadd=PhotoImage(file="images/add.gif")
     tbmaster.btn_add['image']=tbmaster.imgadd
     tbmaster.btn_add.pack(side=LEFT,padx=4,pady=4)

@@ -53,7 +53,7 @@ class DB_SESSION:
             if name =='': break
             desc=input('Vehicle Model: ')
             price=input('Price: ')
-            t=(i_d,name,desc,int(price))
+            t=(i_d,name,desc,str(price))
             self.cur.execute('insert into products values (?,?,?,?)', t)
             i_d+=1
         self.conn.commit()

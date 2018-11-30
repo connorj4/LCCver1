@@ -4,6 +4,7 @@ class MultiListbox(Frame):
     '''MultiListbox made by Labels as table header and Listbox as table colomns'''
     def __init__(self, master, lists):
         Frame.__init__(self, master)
+        self.grid(sticky=N+S+E+W)
         self.lists = []
         for l,w in lists:
             frame = Frame(self); frame.pack(side=LEFT, expand=TRUE, fill="both")
@@ -18,9 +19,9 @@ class MultiListbox(Frame):
             lb.bind('<B2-Motion>', lambda e, s=self: s._b2motion(e.x, e.y))
             lb.bind('<Button-2>', lambda e, s=self: s._button2(e.x, e.y))
         frame = Frame(self); frame.pack(side="left", fill="y")
-        Label(frame, borderwidth=1, relief=RAISED).pack(fill="x")
+        Label(frame, borderwidth=1, relief=RAISED).pack(fill="y")
         sb = Scrollbar(frame, orient="vertical", command=self._scroll)
-        sb.pack(side="left",fill="both",expand=True)
+        sb.pack(side="left",fill="y",expand=True)
         #weird scrolling
         self.lists[0]['yscrollcommand']=sb.set
 
