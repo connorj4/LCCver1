@@ -68,7 +68,6 @@ class FormMenu:
     def _init_widgets(self):
         # initiate toolbar
         self.toolbar = Frame(self.master)
-        self.master.configure(bg="grey1",bd=0)
         lbl0 = Label(self.toolbar, text='LCC').pack(side=LEFT)
         # butcalc=Button(self.toolbar,text='Calc',command=self.calc_click).pack(side=LEFT)
         # butcalendar=Button(self.toolbar,text='Calander',command=self.calendar_click).pack(side=LEFT)
@@ -76,41 +75,40 @@ class FormMenu:
         # self.proba=Toplevel(self.master)
         # self.proba.frame()
         style = Style()
-        style.configure("BW.TLabel",bg="grey1",bd=0,fg="green",padx=0,pady=0)
+        style.configure("BW.TLabel", foreground="white", background="black")
 
         # buttons frame
         # --------------------------------------------
         self.buttons = Frame(self.master, style="BW.TLabel")
-        
         # button for vehicles
-        self.btnproducts = Button(self.buttons,command=self.products_click)
-        self.imgprdt = PhotoImage(file="images/vehicle.gif")
+        self.btnproducts = Button(self.buttons, command=self.products_click)
+        self.imgprdt = PhotoImage(file="img/vehicles.gif")
         self.btnproducts['image'] = self.imgprdt
-        self.btnproducts.pack(side='top',padx=0,pady=0)  # , fill='x')
+        self.btnproducts.pack(side='top')  # , fill='x')
         lbl1 = Label(self.buttons, text="Vehicles", style="BW.TLabel").pack()
         # button for invoices
         self.btninvoices = Button(self.buttons, text='Invoices', command=self.invoices_click)
-        self.imginv = PhotoImage(file="images/invoice.gif")
+        self.imginv = PhotoImage(file="img/invoices.gif")
         self.btninvoices['image'] = self.imginv
-        self.btninvoices.pack(side='top',padx=0,pady=0)
+        self.btninvoices.pack(side='top')
         lbl2 = Label(self.buttons, text="Invoices", style="BW.TLabel").pack()
         # button for customers
         self.btncustomers = Button(self.buttons, text='Customers', command=self.customers_click)
-        self.imgcust = PhotoImage(file="images/customers.gif")
+        self.imgcust = PhotoImage(file="img/customers.gif")
         self.btncustomers['image'] = self.imgcust
-        self.btncustomers.pack(side='top',padx=0,pady=0)
+        self.btncustomers.pack(side='top')
         lbl3 = Label(self.buttons, text="Customers", style="BW.TLabel").pack()
         # quit button
         self.btnquit = Button(self.buttons, text='Quit', command=self.quit_click)
-        self.imgquit = PhotoImage(file="images/power.gif")
+        self.imgquit = PhotoImage(file="img/quit.gif")
         self.btnquit['image'] = self.imgquit
-        self.btnquit.pack(side='top',padx=0,pady=0)
+        self.btnquit.pack(side='top')
         lbl4 = Label(self.buttons, text="Quit", style="BW.TLabel").pack()
-        self.buttons.pack(side='left', padx=0,pady=0)
+        self.buttons.pack(side='left', padx=10)
 
         # background image
         # -------------------------------------------
-        self.imgback = PhotoImage(file="images/back_1.gif")
+        self.imgback = PhotoImage(file="img/back.gif")
         self.lblbackground = Label(self.master, style="BW.TLabel", borderwidth=0)
         self.lblbackground.pack(side='top')
         self.lblbackground['image'] = self.imgback
@@ -190,7 +188,7 @@ class FormProducts:
 
     def _init_gridbox(self):
         self.mlb = MultiListbox(self.frame, (
-        ('id #', 3), ('Make', 25), ('Model', 25), ('Price', 12), ('PlateNumber', 10), ('Year', 12)))
+        ('id #', 3), ('Product', 25), ('Description', 25), ('Price', 12), ('PlateNumber', 10), ('Year', 12)))
         tbproducts = sql.session._query("select * from products")
         self.update_mlb(tbproducts)
         self.mlb.pack(expand=YES, fill=BOTH)
@@ -245,49 +243,55 @@ class FormAddProduct:
 
     def __init__(self):
         self.frame = Toplevel()
-        self.frame.configure(background="grey90",bd=0)
         self.frame.protocol("WM_DELETE_WINDOW", self.callback)  # user quit the screen
         self._init_widgets()
 
     def _init_widgets(self):
-        self.label1 = Label(self.frame, text="Make:")
-        self.label1.grid(row=0, column=0, sticky=W)
+        self.label1 = Label(self.frame, text="Vehicle #")
+        self.label1.grid(row=0, sticky=W)
         self.entry1 = Entry(self.frame)
-        self.entry1.grid(row=0, column=1, sticky=W + E, padx=5, pady=5)
+        self.entry1.grid(row=1, column=0)
 
-        self.label2 = Label(self.frame, text="Sales Price:")
+        self.label2 = Label(self.frame, text="Sales Price")
         self.label2.grid(row=2, column=0, sticky=W)
         self.entry2 = Entry(self.frame)
-        self.entry2.grid(row=2, column=1, sticky=W + E, padx=5, pady=5)
+        self.entry2.grid(row=3, column=0)
 
-        self.label3 = Label(self.frame, text="Model:")
-        self.label3.grid(row=3, column=0, sticky=W)
+        self.label3 = Label(self.frame, text="Description.")
+        self.label3.grid(row=4, sticky=W, columnspan=2)
         self.entry3 = Entry(self.frame)
-        self.entry3.grid(row=3, column=1, sticky=W + E, padx=5, pady=5)
+        self.entry3.grid(row=5, sticky=W + E, columnspan=2)
 
-        self.label4 = Label(self.frame, text="Plate Number:")
-        self.label4.grid(row=4, column=0, sticky=W)
+        self.label4 = Label(self.frame, text="PlateNumber.")
+        self.label4.grid(row=6, sticky=W, columnspan=2)
         self.entry4 = Entry(self.frame)
-        self.entry4.grid(row=4, column=1, sticky=W + E, padx=5, pady=5)
+        self.entry4.grid(row=7, sticky=W + E, columnspan=2)
 
-        self.label5 = Label(self.frame, text="Year:")
-        self.label5.grid(row=5, column=0, sticky=W)
+        self.label5 = Label(self.frame, text="Year.")
+        self.label5.grid(row=8, sticky=W, columnspan=2)
         self.entry5 = Entry(self.frame)
-        self.entry5.grid(row=5, column=1, sticky=W + E, padx=5, pady=5)
+        self.entry5.grid(row=9, sticky=W + E, columnspan=2)
 
         self.btn_ok = Button(self.frame, text="OK", width=7, command=self.btnok_click)
-        self.btn_ok.grid(row=8, column=1, sticky=E, padx=5, pady=5)
+        self.btn_ok.grid(row=10, column=1, sticky=E)
 
     def btnok_click(self):
-        items = (self.entry1.get(), self.entry3.get(), int(self.entry2.get()), self.entry4.get(), self.entry5.get())
+        #For Handling Price & Year Input
+        try:
+            items = (self.entry1.get(), self.entry3.get(), int(self.entry2.get()), self.entry4.get(), int(self.entry5.get()))
+        except:
+            print("Please enter integer number >= 0")
+            return 'beack'
         if '' in items:
             print('please fill everywhere')
             return 'break'
-        sql.session._add_product(items)
-
-        self._okbtn_clicked = 1
-        print('operator exits clicking ok button')
-        self.frame.destroy()
+        #Updated Code
+        #region Add Product
+        if sql.session._add_product(items) == True:
+            self._okbtn_clicked = 1
+            print('operator exits clicking ok button')
+            self.frame.destroy()
+        #endregion
 
     def callback(self):
         self._okbtn_clicked = 0
@@ -642,17 +646,17 @@ class FormAddCustomer:
 
     def _init_widgets(self):
         self.label2 = Label(self.frame, text="CusName")
-        self.label2.grid(row=0, column=0, sticky=W)
+        self.label2.grid(row=0, column=1, sticky=W)
         self.entry2 = Entry(self.frame)
-        self.entry2.grid(row=0, column=1)
+        self.entry2.grid(row=1, column=1)
 
         self.label3 = Label(self.frame, text="CusAddress.")
-        self.label3.grid(row=1, sticky=W, column=0)
+        self.label3.grid(row=2, sticky=W, columnspan=2)
         self.entry3 = Entry(self.frame)
-        self.entry3.grid(row=1, sticky=W + E, column=1)
+        self.entry3.grid(row=3, sticky=W + E, columnspan=2)
 
         self.btn_ok = Button(self.frame, text="OK", width=7, command=self.btnok_click)
-        self.btn_ok.grid(row=2, columnspan=2, sticky=E)
+        self.btn_ok.grid(row=4, column=1, sticky=E)
 
     def btnok_click(self):
         items = (self.entry2.get(), self.entry3.get())
