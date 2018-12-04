@@ -68,6 +68,7 @@ class FormMenu:
     def _init_widgets(self):
         # initiate toolbar
         self.toolbar = Frame(self.master)
+        self.master.configure(bg="grey1",bd=0)
         lbl0 = Label(self.toolbar, text='LCC').pack(side=LEFT)
         # butcalc=Button(self.toolbar,text='Calc',command=self.calc_click).pack(side=LEFT)
         # butcalendar=Button(self.toolbar,text='Calander',command=self.calendar_click).pack(side=LEFT)
@@ -75,36 +76,44 @@ class FormMenu:
         # self.proba=Toplevel(self.master)
         # self.proba.frame()
         style = Style()
-        style.configure("BW.TLabel", foreground="white", background="black")
+        style.configure("BW.TLabel",bg="grey1",bd=0,fg="green",padx=0,pady=0)
 
         # buttons frame
         # --------------------------------------------
         self.buttons = Frame(self.master, style="BW.TLabel")
+        
         # button for vehicles
-        self.btnproducts = Button(self.buttons, command=self.products_click)
+        self.btnproducts = Button(self.buttons,command=self.products_click)
         self.imgprdt = PhotoImage(file="images/vehicle.gif")
         self.btnproducts['image'] = self.imgprdt
-        self.btnproducts.pack(side='top')  # , fill='x')
+        self.btnproducts.pack(side='top',padx=0,pady=0)  # , fill='x')
         lbl1 = Label(self.buttons, text="Vehicles", style="BW.TLabel").pack()
         # button for invoices
         self.btninvoices = Button(self.buttons, text='Invoices', command=self.invoices_click)
         self.imginv = PhotoImage(file="images/invoice.gif")
         self.btninvoices['image'] = self.imginv
-        self.btninvoices.pack(side='top')
+        self.btninvoices.pack(side='top',padx=0,pady=0)
         lbl2 = Label(self.buttons, text="Invoices", style="BW.TLabel").pack()
         # button for customers
         self.btncustomers = Button(self.buttons, text='Customers', command=self.customers_click)
         self.imgcust = PhotoImage(file="images/customers.gif")
         self.btncustomers['image'] = self.imgcust
-        self.btncustomers.pack(side='top')
+        self.btncustomers.pack(side='top',padx=0,pady=0)
         lbl3 = Label(self.buttons, text="Customers", style="BW.TLabel").pack()
         # quit button
         self.btnquit = Button(self.buttons, text='Quit', command=self.quit_click)
         self.imgquit = PhotoImage(file="images/power.gif")
         self.btnquit['image'] = self.imgquit
-        self.btnquit.pack(side='top')
+        self.btnquit.pack(side='top',padx=0,pady=0)
         lbl4 = Label(self.buttons, text="Quit", style="BW.TLabel").pack()
-        self.buttons.pack(side='left', padx=10)
+        self.buttons.pack(side='left', padx=0,pady=0)
+
+        # background image
+        # -------------------------------------------
+        self.imgback = PhotoImage(file="images/back_1.gif")
+        self.lblbackground = Label(self.master, style="BW.TLabel", borderwidth=0)
+        self.lblbackground.pack(side='top')
+        self.lblbackground['image'] = self.imgback
 
         # background image
         # -------------------------------------------
