@@ -24,9 +24,6 @@ class DB_SESSION:
         self.cur.execute('DELETE FROM invoiceitems WHERE invoiceid = ?', t)
         self.conn.commit()
 
-    #Update Code
-    """
-    """
     # region Add Product
     def _add_product(self,items):
         self.cur.execute('select MAX(id) from products')
@@ -48,14 +45,12 @@ class DB_SESSION:
             print("Unexpected error:", sys.exc_value)
             return False
     # endregion
-
     def _add_customer(self, items):
         self.cur.execute('select MAX(cusid) from customers')
         i_d = self.cur.fetchone()[0] + 1
         items = (i_d, )+items
         self.cur.execute('INSERT INTO customers VALUES (?, ?, ?)', items)
         self.conn.commit()
-
     def _add_invoice(self, inv, items):
         #items is a list comprising (id, invoiceid, productid, quantity)
         #inv is a tuple comprising (id,customer, date, amount)
@@ -63,7 +58,6 @@ class DB_SESSION:
         for t in items:
             self.cur.execute('INSERT INTO invoiceitems VALUES (?, ?, ?, ?)', t)
         self.conn.commit()
-        
     def _add_product_cmd(self):
         self.cur.execute('select MAX(id) from products')
         i_d = self.cur.fetchone()[0] + 1
@@ -101,17 +95,14 @@ class DB_SESSION:
         self.cur.execute('select MAX(id) from invoices')
         i_d = self.cur.fetchone()[0] + 1
         return i_d
-
-   def _add_invoice(self):
+    def _add_invoice(self):
         query = "INSERT INTO invoices VALUES (0,'', 0, 0)"
         c =s elf.conn.cursor()
         c.execute(query)
         self.conn.commit()
         print (self._last_rowid())
-
     def _add_invoice_items(self):
         pass
-        
     def _update(self):
         query = 'UPDATE invoices SET invoiceid = 4 WHERE id = "Smith"';        
     def _last_rowid(self):
