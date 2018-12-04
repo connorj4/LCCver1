@@ -1,22 +1,19 @@
-"""
-Simple calendar using ttk Treeview together with calendar and datetime
-classes.
-"""
+"""Simple calendar using ttk Treeview together with calendar and datetime
+classes."""
 import calendar
 import tkinter
 import tkinter.font
 from tkinter import ttk
 
 def get_calendar(locale, fwday):
-    # instantiate proper calendar class
+    """instantiate proper calendar class"""
     if locale is None:
         return calendar.TextCalendar(fwday)
     else:
         return calendar.LocaleTextCalendar(fwday, locale)
 
 class ttkCalendar:
-    # XXX ToDo: cget and configure
-
+    """set up calendar to conform to correct date"""
     datetime = calendar.datetime.datetime
     timedelta = calendar.datetime.timedelta
 
@@ -36,16 +33,13 @@ class ttkCalendar:
         sel_fg = kw.pop('selectforeground', '#05640e')
 
         #will be used by main root window
-        self.top=tkinter.Toplevel()
-        self.flag=True
-        self._okbtn_clicked=False
-        
+        self.top = tkinter.Toplevel()
+        self.flag = True
+        self._okbtn_clicked = False
         self._date = self.datetime(year, month, 1)
         self._selection = None # no date selected
         self.top.protocol("WM_DELETE_WINDOW", self.callback) #user quit the screen
-        
         self._cal = get_calendar(locale, fwday)
-
         self.__setup_styles()       # creates custom styles
         self.__place_widgets()      # pack/grid used widgets
         self.__config_calendar()    # adjust calendar columns and setup tags
@@ -54,7 +48,7 @@ class ttkCalendar:
 
         # store items ids, used for insertion later
         self._items = [self._calendar.insert('', 'end', values='')
-                            for _ in range(6)]
+                       for _ in range(6)]
         # insert dates in the currently empty calendar
         self._build_calendar()
 
@@ -83,7 +77,7 @@ class ttkCalendar:
             return r[item]
 
     def __setup_styles(self):
-        # custom ttk styles
+        """custom ttk styles"""
         style = ttk.Style(self.top)
         arrow_layout = lambda dir: (
             [('Button.focus', {'children': [('Button.%sarrow' % dir, None)]})]
@@ -92,23 +86,19 @@ class ttkCalendar:
         style.layout('R.TButton', arrow_layout('right'))
 
     def __place_widgets(self):
-        # header frame and its widgets
+        """header frame and its widgets"""
         hframe = ttk.Frame(self.top)
         lbtn = ttk.Button(hframe, style='L.TButton', command=self._prev_month)
         rbtn = ttk.Button(hframe, style='R.TButton', command=self._next_month)
         self._header = ttk.Label(hframe, width=15, anchor='center')
-        hframe.pack( side='top', pady=4, anchor='center')
+        hframe.pack(side='top', pady=4, anchor='center')
         # the calendar
-        self._calendar = ttk.Treeview(self.top,show='', selectmode='none', height=7)
+        self._calendar = ttk.Treeview(self.top, show='', selectmode='none', height=7)
         # pack the widgets
-        
         lbtn.grid(in_=hframe)
         self._header.grid(in_=hframe, column=1, row=0, padx=12)
         rbtn.grid(in_=hframe, column=2, row=0)
-        self._calendar.pack( expand=1, fill='both')#, side='bottom')
-        butok=ttk.Button(self.top,text="OK",command=self.btnok_click).pack(side='bottom')
-        
-        
+        self._calendar.pack(expand=1, fill='both')#, side='bottom')
     def __config_calendar(self):
         cols = self._cal.formatweekheader(3).split()
         self._calendar['columns'] = cols
@@ -119,12 +109,13 @@ class ttkCalendar:
         maxwidth = max(font.measure(col) for col in cols)
         for col in cols:
             self._calendar.column(col, width=maxwidth, minwidth=maxwidth,
-                anchor='e')
+                                  anchor='e')
 
     def __setup_selection(self, sel_bg, sel_fg):
         self._font = tkinter.font.Font()
         self._canvas = canvas = tkinter.Canvas(self._calendar,
-            background=sel_bg, borderwidth=0, highlightthickness=0)
+                                               background=sel_bg, borderwidth=0, \
+                                               highlightthickness=0)
         canvas.text = canvas.create_text(0, 0, fill=sel_fg, anchor='w')
 
         canvas.bind('<ButtonPress-1>', lambda evt: canvas.place_forget())
@@ -210,23 +201,19 @@ class ttkCalendar:
         self._build_calendar() # reconstruct calendar
 
     def btnok_click(self):
-        print ('ok button clicked')
+        """date selection button"""
+        print('ok button clicked')
         if self._selection:
-            self._okbtn_clicked=True
+            self._okbtn_clicked = True
             self.callback()
         else:
             print('please select a date first')
-            
     def callback(self):
-        self.flag=False
-        if self._okbtn_clicked==True:
-            self.datepicked=(self._date.year,self._date.month,int(self._selection[0]))
+        """pick selected date if button is clicked"""
+        self.flag = False
+        if self._okbtn_clicked is True:
+            self.datepicked = (self._date.year, self._date.month, int(self._selection[0]))
         else:
-            self.datepicked=None
+            self.datepicked = None
         self.top.destroy()
         
-        
-        
-        
-
-    

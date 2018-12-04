@@ -1,6 +1,6 @@
-from tkinter import *
+"""administrative menu, add, edit, delete, find buttons"""
+from tkinter import Frame, TOP, X, Button, PhotoImage, LEFT, Entry
 def _init_toolbar(tbmaster):
-    
     '''Menu has buttons to ADD, EDIT, DELETE AND FIND
         the argument is a class and it must have:
         tbmaster.frame              :- a root window class
