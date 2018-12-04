@@ -8,14 +8,9 @@ class MultiListbox(Frame):
         Frame.__init__(self, master)
         self.grid(sticky=N+S+E+W)
         self.lists = []
-<<<<<<< HEAD
-        for l,w in lists:
-            frame = Frame(self); frame.pack(side=LEFT, expand=TRUE, fill="both")
-=======
         for l, w in lists:
             frame = Frame(self)
             frame.pack(side=LEFT, expand=YES, fill=BOTH)
->>>>>>> b1030a81ce4ab299f2f7a8cfe9b9dc82f044554a
             Label(frame, text=l, borderwidth=1, relief=RAISED).pack(fill=X)
             lb = Listbox(frame, width=w, borderwidth=0, selectborderwidth=0,
                          relief=FLAT, exportselection=FALSE)
@@ -26,21 +21,12 @@ class MultiListbox(Frame):
             lb.bind('<Leave>', lambda e: 'break')
             lb.bind('<B2-Motion>', lambda e, s=self: s._b2motion(e.x, e.y))
             lb.bind('<Button-2>', lambda e, s=self: s._button2(e.x, e.y))
-<<<<<<< HEAD
-        frame = Frame(self); frame.pack(side="left", fill="y")
-        Label(frame, borderwidth=1, relief=RAISED).pack(fill="y")
-        sb = Scrollbar(frame, orient="vertical", command=self._scroll)
-        sb.pack(side="left",fill="y",expand=True)
-        #weird scrolling
-        self.lists[0]['yscrollcommand']=sb.set
-=======
         frame = Frame(self)
         frame.pack(side=LEFT, fill=Y)
         Label(frame, borderwidth=1, relief=RAISED).pack(fill=X)
         sb = Scrollbar(frame, orient=VERTICAL, command=self._scroll)
         sb.pack(expand=YES, fill=Y)
         self.lists[0]['yscrollcommand'] = sb.set
->>>>>>> b1030a81ce4ab299f2f7a8cfe9b9dc82f044554a
 
 
     def _select(self, y):

@@ -16,17 +16,6 @@ def haslo():
         # frmmenu._init_menu()
         frmenu._init_widgets()
 
-<<<<<<< HEAD
-            conn = sqlite3.connect("lcc")
-            cur = conn.cursor()
-            cur.execute("select * from invoices")
-            print(cur.fetchone()[1])
-            results = cur.fetchall()
-            root.mainloop()
-        else:
-            print("Nope, you are not the right person")
-            raise NameError("Invalid")
-=======
         conn = sqlite3.connect("lcc")
         cur = conn.cursor()
         cur.execute("select* from invoices")
@@ -35,7 +24,6 @@ def haslo():
     else:
         print("Nope, you are not the right person")
         raise NameError("Invalid")
->>>>>>> b1030a81ce4ab299f2f7a8cfe9b9dc82f044554a
 haslo()
 root = gui.Tk()
 #frame = gui.MyFrame(root)
