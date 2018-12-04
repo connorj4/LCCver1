@@ -27,6 +27,12 @@ def haslo():
             print("Nope, you are not the right person")
             raise NameError("Invalid")
 haslo()
+#Update Code
+"""
+    Comment this
+"""
+#Start Code
+"""
 root=gui.Tk()
 #frame = gui.MyFrame(root)
 #frame.pack()
@@ -44,3 +50,6 @@ results=cur.fetchall()
 if __name__ == "__main__":
     #Example(root).pack(fill="both", expand=True)
     root.mainloop()
+
+"""
+#End Code
