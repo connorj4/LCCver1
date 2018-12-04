@@ -41,6 +41,3 @@ print(cur.fetchone()[1])
 if __name__ == "__main__":
     #Example(root).pack(fill="both", expand=True)
     root.mainloop()
-
-"""
-#End Code

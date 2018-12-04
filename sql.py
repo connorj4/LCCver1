@@ -29,7 +29,6 @@ class DB_SESSION:
         self.cur.execute('select MAX(id) from products')
         i_d = self.cur.fetchone()[0] + 1
         items = (i_d,) + items
-
         try:
             import vehicles
             v = vehicles.vehicles()
@@ -97,7 +96,7 @@ class DB_SESSION:
         return i_d
     def _add_invoice(self):
         query = "INSERT INTO invoices VALUES (0,'', 0, 0)"
-        c =s elf.conn.cursor()
+        c =self.conn.cursor()
         c.execute(query)
         self.conn.commit()
         print (self._last_rowid())
@@ -106,6 +105,6 @@ class DB_SESSION:
     def _update(self):
         query = 'UPDATE invoices SET invoiceid = 4 WHERE id = "Smith"';        
     def _last_rowid(self):
-        return int(self.c.lastrowid)'''
+        return int(self.c.lastrowid)
 
 session = DB_SESSION(sqlite3.connect('lcc'))
