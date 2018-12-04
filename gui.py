@@ -82,25 +82,25 @@ class FormMenu:
         self.buttons = Frame(self.master, style="BW.TLabel")
         # button for vehicles
         self.btnproducts = Button(self.buttons, command=self.products_click)
-        self.imgprdt = PhotoImage(file="img/vehicles.gif")
+        self.imgprdt = PhotoImage(file="images/vehicle.gif")
         self.btnproducts['image'] = self.imgprdt
         self.btnproducts.pack(side='top')  # , fill='x')
         lbl1 = Label(self.buttons, text="Vehicles", style="BW.TLabel").pack()
         # button for invoices
         self.btninvoices = Button(self.buttons, text='Invoices', command=self.invoices_click)
-        self.imginv = PhotoImage(file="img/invoices.gif")
+        self.imginv = PhotoImage(file="images/invoice.gif")
         self.btninvoices['image'] = self.imginv
         self.btninvoices.pack(side='top')
         lbl2 = Label(self.buttons, text="Invoices", style="BW.TLabel").pack()
         # button for customers
         self.btncustomers = Button(self.buttons, text='Customers', command=self.customers_click)
-        self.imgcust = PhotoImage(file="img/customers.gif")
+        self.imgcust = PhotoImage(file="images/customers.gif")
         self.btncustomers['image'] = self.imgcust
         self.btncustomers.pack(side='top')
         lbl3 = Label(self.buttons, text="Customers", style="BW.TLabel").pack()
         # quit button
         self.btnquit = Button(self.buttons, text='Quit', command=self.quit_click)
-        self.imgquit = PhotoImage(file="img/quit.gif")
+        self.imgquit = PhotoImage(file="images/power.gif")
         self.btnquit['image'] = self.imgquit
         self.btnquit.pack(side='top')
         lbl4 = Label(self.buttons, text="Quit", style="BW.TLabel").pack()
@@ -108,7 +108,7 @@ class FormMenu:
 
         # background image
         # -------------------------------------------
-        self.imgback = PhotoImage(file="img/back.gif")
+        self.imgback = PhotoImage(file="images/back_1.gif")
         self.lblbackground = Label(self.master, style="BW.TLabel", borderwidth=0)
         self.lblbackground.pack(side='top')
         self.lblbackground['image'] = self.imgback
