@@ -22,30 +22,12 @@ class DB_SESSION:
         self.cur.execute('DELETE FROM invoiceitems WHERE invoiceid=?',t)
         self.conn.commit()
 
-    #Update Code
-    """
-    """
-    # region Add Product
     def _add_product(self,items):
         self.cur.execute('select MAX(id) from products')
-        i_d = self.cur.fetchone()[0] + 1
-        items = (i_d,) + items
-
-        try:
-            import vehicles
-            v = vehicles.vehicles()
-            if (v.check_vehicle(items) == True):
-                self.cur.execute('INSERT INTO products VALUES (?,?,?,?,?,?)', items)
-                self.conn.commit()
-                return True
-        except SyntaxError as e:
-            print("Error :- ", e)
-            return False
-        except:
-            import sys
-            print("Unexpected error:", sys.exc_value)
-            return False
-    # endregion
+        i_d=self.cur.fetchone()[0] + 1
+        items=(i_d,)+items
+        self.cur.execute('INSERT INTO products VALUES (?,?,?,?,?,?)',items)
+        self.conn.commit()
 
     def _add_customer(self,items):
         self.cur.execute('select MAX(cusid) from customers')
@@ -61,7 +43,7 @@ class DB_SESSION:
         for t in items:
             self.cur.execute('INSERT INTO invoiceitems VALUES (?,?,?,?)',t)
         self.conn.commit()
-
+        
     def _add_product_cmd(self):
         self.cur.execute('select MAX(id) from products')
         i_d=self.cur.fetchone()[0] + 1
@@ -86,7 +68,7 @@ class DB_SESSION:
         t=(i_d,)
         self.cur.execute('DELETE FROM products WHERE id=?',t)
         self.conn.commit()
-    def _delete_customer(self,i_d):
+    def _delete_customer(selfself,i_d):
         t=(i_d,)
         self.cur.execute('DELETE FROM customers WHERE cusid=?',t)
         self.conn.commit()
@@ -96,17 +78,17 @@ class DB_SESSION:
         self.cur.execute('select MAX(id) from invoices')
         i_d=self.cur.fetchone()[0] + 1
         return i_d
-'''
+'''    
     def _add_invoice(self):
         query="INSERT INTO invoices VALUES (0,'',0,0)"
         c=self.conn.cursor()
         c.execute(query)
         self.conn.commit()
-        print (self._last_rowid())
+        print (self._last_rowid())                       
     def _add_invoice_items(self):
-        pass
+        pass    
     def _update(self):
-        query='UPDATE invoices SET invoiceid=4 WHERE id = "Smith"';
+        query='UPDATE invoices SET invoiceid=4 WHERE id = "Smith"';        
     def _last_rowid(self):
         return int(self.c.lastrowid)
 '''
